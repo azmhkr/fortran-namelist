@@ -1,0 +1,25 @@
+{
+  "name": "fortran-namelist",
+  "displayName": "Fortran NameList",
+  "description": "Provides syntax highlighting for Fortran standard namelist files.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "namelist",
+      "aliases": ["namelist", "namelist"],
+      "extensions": [".nml",".naml"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "namelist",
+      "scopeName": "source.nml",
+      "path": "./syntaxes/namelist.tmLanguage.json"
+    }]
+  }
+}
