@@ -3,13 +3,10 @@
 	"name": "namelist",
 	"patterns": [
 		{
-			"include": "#strings"
-		},
-		{
-			"include": "#strings_single"
-		},
-		{
 			"include": "#comment"
+		},
+		{
+			"include": "#var_declaration"
 		}
 	],
 	"repository": {
@@ -21,28 +18,61 @@
 				}
 			]
 		},
-		"strings": {
-			"name": "string.quoted.double.namelist",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.namelist",
-					"match": "\\\\."
-				}
-			]
-		},
-		"strings_single": {
-			"name": "string.quoted.namelist",
-			"begin": "'",
-			"end": "'",
-			"patterns": [
-				{
-					"name": "constant.character.escape.namelist",
-					"match": "\\\\."
-				}
-			]
-		}
+        "var_declaration": {
+            "patterns": [
+                {
+                    "match": "(\\S+)\\s*=\\s*(.*)",
+                    "captures": {
+                        "1": {"patterns": [{"include": "#var"}]},
+                        "2": {"patterns": [{"include": "#constant"}]}
+                    }
+                }
+            ],
+            "repository": {
+                "var": {
+                    "patterns": [
+                        {
+                            "name": "variable.other.namelist",
+                            "match": "[a-zA-Z]+[_0-9a-zA-Z]*"
+                        }
+                    ]
+                },
+                "constant": {
+                    "patterns": [
+                        {"include": "#constant_number"},
+                        {"include": "#constant_string"},
+                        {"include": "#constant_bool"}
+                    ],
+                    "repository": {
+                        "constant_number": {
+                            "patterns": [
+                                {
+                                    "name": "constant.numeric.namelist",
+                                    "match": "-?[0-9]+\\.?[0-9]*((d|e)[0-9]+)?"
+                                }
+                            ]
+                        },
+                        "constant_string": {
+                            "patterns": [
+                                {
+                                    "name": "constant.character.namelist",
+                                    "begin": "\"",
+                                    "end": "\""
+                                }
+                            ]
+                        },
+                        "constant_bool": {
+                            "patterns": [
+                                {
+                                    "name": "constant.language.namelist",
+                                    "match": "\\.true\\.|\\.false\\."
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
 	},
 	"scopeName": "source.nml"
 }
