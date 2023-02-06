@@ -3,23 +3,39 @@
 	"name": "namelist",
 	"patterns": [
 		{
-			"include": "#keywords"
+			"include": "#strings"
 		},
 		{
-			"include": "#strings"
+			"include": "#strings_single"
+		},
+		{
+			"include": "#comment"
 		}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.namelist",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.line.namelist",
+					"match": "!.*"
+				}
+			]
 		},
 		"strings": {
 			"name": "string.quoted.double.namelist",
 			"begin": "\"",
 			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.namelist",
+					"match": "\\\\."
+				}
+			]
+		},
+		"strings_single": {
+			"name": "string.quoted.namelist",
+			"begin": "'",
+			"end": "'",
 			"patterns": [
 				{
 					"name": "constant.character.escape.namelist",
